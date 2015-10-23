@@ -1,31 +1,43 @@
 package m.pekka.climbinapptest.Climb;
 
-import m.pekka.climbinapptest.IMainActivity;
+import m.pekka.climbinapptest.ActivityInterface;
 
 /**
  * Created by Pekka Melgin on 22.10.2015.
  */
 public class ClimbPresenter {
 
-    private IMainActivity iMainActivity;
+    private ActivityInterface activityInterface;
     private ClimbInteractor climbInteractor;
 
-    public ClimbPresenter(IMainActivity iMainActivity) {
-        this.iMainActivity = iMainActivity;
-        this.climbInteractor = new ClimbInteractor(iMainActivity.getContext());
+    public ClimbPresenter(ActivityInterface activityInterface) {
+        this.activityInterface = activityInterface;
+        this.climbInteractor = new ClimbInteractor(activityInterface.getContext());
     }
 
-    public void addClimb() {
-        long id = this.climbInteractor.addClimb(this.iMainActivity.getInput());
-        if (this.iMainActivity.getInput() != -1 && id != -1) {
-            this.iMainActivity.setResultMsg("Climb added to db. ID: " + id);
+    public void addClimb(String grade) {
+        if (grade.equals("")) {
+            this.activityInterface.setResultMsg("Input fields empty.");
         }
         else {
-            this.iMainActivity.setResultMsg("Sum shite happened.... ");
+            long id = this.climbInteractor.addClimb(grade);
+            if (id == -1) {
+                this.activityInterface.setResultMsg("Sum shite happened.... ");
+            } else {
+                this.activityInterface.setResultMsg("Climb added to db.");
+            }
         }
+    }
+
+    public void getClimbCount() {
+        this.activityInterface.setResultMsg("Total climbs: " + this.climbInteractor.getClimbCount());
+    }
+
+    public void getClimb(int id) {
+
     }
 
     public void getAvgGrade() {
-        this.iMainActivity.setResultMsg("Average grade climbed: " + Long.toString(climbInteractor.getAvgGrade()));
+        this.activityInterface.setResultMsg("Average grade climbed: " + Long.toString(climbInteractor.getAvgGrade()));
     }
 }

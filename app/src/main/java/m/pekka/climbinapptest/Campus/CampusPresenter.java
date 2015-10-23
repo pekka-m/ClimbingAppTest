@@ -1,31 +1,41 @@
 package m.pekka.climbinapptest.Campus;
 
-import m.pekka.climbinapptest.IMainActivity;
+import m.pekka.climbinapptest.ActivityInterface;
 
 /**
  * Created by Pekka Melgin on 22.10.2015.
  */
 public class CampusPresenter {
 
-    private IMainActivity iMainActivity;
+    private ActivityInterface activityInterface;
     private CampusInteractor campusInteractor;
 
-    public CampusPresenter(IMainActivity iMainActivity) {
-        this.iMainActivity = iMainActivity;
-        this.campusInteractor = new CampusInteractor(iMainActivity.getContext());
+    public CampusPresenter(ActivityInterface activityInterface) {
+        this.activityInterface = activityInterface;
+        this.campusInteractor = new CampusInteractor(activityInterface.getContext());
     }
 
-    public void addCampus() {
-        long id = this.campusInteractor.addCampus(this.iMainActivity.getInput());
-        if (this.iMainActivity.getInput() != -1 && id != -1) {
-            this.iMainActivity.setResultMsg("Campus added to db. ID: " + id);
+    public void addCampus(int steps) {
+        if (steps == -1) {
+            this.activityInterface.setResultMsg("Input field error");
         }
         else {
-            this.iMainActivity.setResultMsg("Sum shite happened.... ");
+            long id = this.campusInteractor.addCampus(steps);
+            if (id == -1) {
+                this.activityInterface.setResultMsg("Sum shite happened...");
+            }
+            else {
+                this.activityInterface.setResultMsg("Campus added to db.");
+            }
+
         }
+    }
+
+    public void getCampusCount() {
+        this.activityInterface.setResultMsg("Total campus workouts: " + this.campusInteractor.getCampusCount());
     }
 
     public void getTotalSteps() {
-        this.iMainActivity.setResultMsg("Total steps campused: " + Long.toString(campusInteractor.getTotalSteps()));
+        this.activityInterface.setResultMsg("Total steps campused: " + Long.toString(campusInteractor.getTotalSteps()));
     }
 }

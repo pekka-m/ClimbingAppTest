@@ -9,21 +9,33 @@ import android.database.Cursor;
 public class HangboardInteractor {
 
     private HangboardEntity hangboardEntity;
-    private HangboardMapper hangboardMapper;
+    private HangboardMapper mapper;
+    private Cursor cursor;
 
     public HangboardInteractor(Context context) {
-        this.hangboardMapper = new HangboardMapper(context);
+        this.mapper = new DBMapper(context);
     }
 
     public long addHang(int time) {
         hangboardEntity = new HangboardEntity();
         hangboardEntity.setTime(time);
-        return hangboardMapper.insertHang(hangboardEntity);
+        return mapper.insertHang(hangboardEntity);
+    }
+
+    public long getHangboardCount() {
+        this.cursor = this.mapper.fetchAll();
+        long hangboardCount = 0;
+        if (cursor.moveToFirst()) {
+            do {
+                hangboardCount++;
+            } while (cursor.moveToNext());
+        }
+        return hangboardCount;
     }
 
     public long getTotalHang() {
         long totalHang = 0;
-        Cursor cursor = this.hangboardMapper.fetchAll();
+        this.cursor = this.mapper.fetchAll();
         if (cursor.moveToFirst()) {
             do {
                 totalHang += cursor.getInt(0);

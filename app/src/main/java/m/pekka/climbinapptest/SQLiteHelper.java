@@ -20,7 +20,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private static final String KEY_STEPS = "Steps";
     private static final String KEY_TIME = "Time";
 
-    private static final String CREATE_TABLE_CLIMB = "CREATE TABLE " + TABLE_CLIMB + " (" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_GRADE + " INTEGER);";
+    private static final String CREATE_TABLE_CLIMB = "CREATE TABLE " + TABLE_CLIMB + " (" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_GRADE + " TEXT);";
     private static final String CREATE_TABLE_CAMPUS = "CREATE TABLE " + TABLE_CAMPUS + " (" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_STEPS + " INTEGER);";
     private static final String CREATE_TABLE_HANGBOARD = "CREATE TABLE " + TABLE_HANGBOARD + " (" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_TIME + " INTEGER);";
 

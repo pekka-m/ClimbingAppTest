@@ -10,6 +10,7 @@ public class CampusInteractor {
 
     private CampusEntity campusEntity;
     private CampusMapper campusMapper;
+    private Cursor cursor;
 
     public CampusInteractor(Context context) {
         this.campusMapper = new CampusMapper(context);
@@ -19,6 +20,17 @@ public class CampusInteractor {
         this.campusEntity = new CampusEntity();
         this.campusEntity.setSteps(steps);
         return campusMapper.insertCampus(this.campusEntity);
+    }
+
+    public long getCampusCount() {
+        this.cursor = this.campusMapper.fetchAll();
+        long campusCount = 0;
+        if (cursor.moveToFirst()) {
+            do {
+                campusCount++;
+            } while (cursor.moveToNext());
+        }
+        return campusCount;
     }
 
     public long getTotalSteps() {
