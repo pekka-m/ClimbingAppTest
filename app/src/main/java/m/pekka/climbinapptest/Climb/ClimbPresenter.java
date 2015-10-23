@@ -17,24 +17,21 @@ public class ClimbPresenter {
 
     public void addClimb(String grade) {
         if (grade.equals("")) {
-            this.activityInterface.setResultMsg("Input fields empty.");
+            this.activityInterface.setResultMsg("Input field error.");
         }
         else {
-            long id = this.climbInteractor.addClimb(grade);
-            if (id == -1) {
-                this.activityInterface.setResultMsg("Sum shite happened.... ");
-            } else {
+            try {
+                this.climbInteractor.addClimb(grade);
                 this.activityInterface.setResultMsg("Climb added to db.");
+            }
+            catch (Exception e) {
+                this.activityInterface.setResultMsg("Database error.");
             }
         }
     }
 
     public void getClimbCount() {
         this.activityInterface.setResultMsg("Total climbs: " + this.climbInteractor.getClimbCount());
-    }
-
-    public void getClimb(int id) {
-
     }
 
     public void getAvgGrade() {

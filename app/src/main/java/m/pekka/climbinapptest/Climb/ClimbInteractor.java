@@ -3,27 +3,29 @@ package m.pekka.climbinapptest.Climb;
 import android.content.Context;
 import android.database.Cursor;
 
+import m.pekka.climbinapptest.Hangboard.HangboardMapper;
+
 /**
  * Created by Pekka Melgin on 22.10.2015.
  */
 public class ClimbInteractor {
 
     private ClimbEntity climbEntity;
-    private ClimbMapper climbMapper;
+    private ClimbMapper mapper;
     private Cursor cursor;
 
     public ClimbInteractor(Context context) {
-        this.climbMapper = new ClimbMapper(context);
+        this.mapper = new DBMapper(context);
     }
 
-    public long addClimb(String grade) {
+    public long addClimb(String grade) throws Exception {
         climbEntity = new ClimbEntity();
         climbEntity.setGrade(grade);
-        return climbMapper.insertClimb(climbEntity);
+        return mapper.insertClimb(climbEntity);
     }
 
     public long getClimbCount() {
-        this.cursor = this.climbMapper.fetchAll();
+        this.cursor = this.mapper.fetchAll();
         long climbCount = 0;
         if (cursor.moveToFirst()) {
             do {
@@ -36,7 +38,7 @@ public class ClimbInteractor {
     public long getAvgGrade() {
         long totalGrade = 0;
         long gradeCount = 0;
-        this.cursor = this.climbMapper.fetchAll();
+        this.cursor = this.mapper.fetchAll();
         if (cursor.moveToFirst()) {
             do {
                 totalGrade += cursor.getInt(0);

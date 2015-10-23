@@ -1,17 +1,16 @@
-package m.pekka.climbinapptest.Hangboard;
+package m.pekka.climbinapptest.Campus;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import m.pekka.climbinapptest.SQLiteHelper;
 
 /**
- * Created by Pekka Melgin on 23.10.2015.
+ * Created by Pekka Melgin on 22.10.2015.
  */
-public class DBMapper implements HangboardMapper {
+public class DBMapper implements CampusMapper {
 
     private SQLiteDatabase db;
 
@@ -20,10 +19,10 @@ public class DBMapper implements HangboardMapper {
     }
 
     @Override
-    public long insertHang(HangboardEntity hangboardEntity) throws Exception {
+    public long insertCampus(CampusEntity campusEntity) throws Exception {
         ContentValues values = new ContentValues();
-        values.put("Time", hangboardEntity.getTime());
-        long id = this.db.insert("Hangboard", null, values);
+        values.put("Steps", campusEntity.getSteps());
+        long id = this.db.insert("Campus", null, values);
         if (id == -1) {
             throw new Exception();
         }
@@ -32,6 +31,6 @@ public class DBMapper implements HangboardMapper {
 
     @Override
     public Cursor fetchAll() {
-        return this.db.rawQuery("SELECT Time FROM Hangboard", null);
+        return this.db.rawQuery("SELECT Steps FROM Campus", null);
     }
 }

@@ -15,19 +15,14 @@ public class CampusPresenter {
         this.campusInteractor = new CampusInteractor(activityInterface.getContext());
     }
 
-    public void addCampus(int steps) {
-        if (steps == -1) {
-            this.activityInterface.setResultMsg("Input field error");
-        }
-        else {
-            long id = this.campusInteractor.addCampus(steps);
-            if (id == -1) {
-                this.activityInterface.setResultMsg("Sum shite happened...");
-            }
-            else {
-                this.activityInterface.setResultMsg("Campus added to db.");
-            }
-
+    public void addCampus(String steps) {
+        try {
+            this.campusInteractor.addCampus(Integer.parseInt(steps));
+            this.activityInterface.setResultMsg("Campus added to db.");
+        } catch (NumberFormatException e) {
+            this.activityInterface.setResultMsg("Input field error.");
+        } catch (Exception e) {
+            this.activityInterface.setResultMsg("Database error.");
         }
     }
 

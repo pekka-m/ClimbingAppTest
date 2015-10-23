@@ -60,5 +60,4 @@ public class ClimbActivity extends AppCompatActivity implements ActivityInterfac
     private String getGrade() {
         return editText_gradeNumber.getText().toString() + editText_gradeLetter.getText().toString();
     }
-
 }

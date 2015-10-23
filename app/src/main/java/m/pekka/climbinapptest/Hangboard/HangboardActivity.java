@@ -49,16 +49,8 @@ public class HangboardActivity extends AppCompatActivity implements ActivityInte
     private View.OnClickListener addHang() {
         return new View.OnClickListener() {
             public void onClick(View v) {
-                hangboardPresenter.addHang(getTime());
+                hangboardPresenter.addHang(editText_hangboardTime.getText().toString());
             }
         };
-    }
-
-    private int getTime() {
-        try {
-            return Integer.parseInt(editText_hangboardTime.getText().toString());
-        } catch (NumberFormatException e) {
-            return -1;
-        }
     }
 }

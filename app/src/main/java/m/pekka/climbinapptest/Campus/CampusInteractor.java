@@ -9,21 +9,21 @@ import android.database.Cursor;
 public class CampusInteractor {
 
     private CampusEntity campusEntity;
-    private CampusMapper campusMapper;
+    private CampusMapper mapper;
     private Cursor cursor;
 
     public CampusInteractor(Context context) {
-        this.campusMapper = new CampusMapper(context);
+        this.mapper = new DBMapper(context);
     }
 
-    public long addCampus(int steps) {
+    public long addCampus(int steps) throws Exception {
         this.campusEntity = new CampusEntity();
         this.campusEntity.setSteps(steps);
-        return campusMapper.insertCampus(this.campusEntity);
+        return mapper.insertCampus(this.campusEntity);
     }
 
     public long getCampusCount() {
-        this.cursor = this.campusMapper.fetchAll();
+        this.cursor = this.mapper.fetchAll();
         long campusCount = 0;
         if (cursor.moveToFirst()) {
             do {
@@ -35,7 +35,7 @@ public class CampusInteractor {
 
     public long getTotalSteps() {
         long totalSteps = 0;
-        Cursor cursor = this.campusMapper.fetchAll();
+        Cursor cursor = this.mapper.fetchAll();
         if (cursor.moveToFirst()) {
             do {
                 totalSteps += cursor.getInt(0);

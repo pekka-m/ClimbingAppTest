@@ -16,7 +16,7 @@ public class HangboardInteractor {
         this.mapper = new DBMapper(context);
     }
 
-    public long addHang(int time) {
+    public long addHang(int time) throws Exception {
         hangboardEntity = new HangboardEntity();
         hangboardEntity.setTime(time);
         return mapper.insertHang(hangboardEntity);

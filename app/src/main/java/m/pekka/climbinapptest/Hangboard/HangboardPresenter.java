@@ -17,18 +17,14 @@ public class HangboardPresenter {
         this.hangboardInteractor = new HangboardInteractor(activityInterface.getContext());
     }
 
-    public void addHang(int time) {
-        if (time == -1) {
-            this.activityInterface.setResultMsg("Input field error");
-        }
-        else {
-            long id = this.hangboardInteractor.addHang(time);
-            if (id == -1) {
-                this.activityInterface.setResultMsg("Sum shite happened...");
-            }
-            else {
-                this.activityInterface.setResultMsg("Hang added to db.");
-            }
+    public void addHang(String time) {
+        try {
+            this.hangboardInteractor.addHang(Integer.parseInt(time));
+            this.activityInterface.setResultMsg("Hang added to db.");
+        } catch (NumberFormatException e) {
+            this.activityInterface.setResultMsg("Input field error.");
+        } catch (Exception e) {
+            this.activityInterface.setResultMsg("Database error.");
         }
     }
 
