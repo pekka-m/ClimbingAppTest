@@ -36,6 +36,6 @@ public class ClimbPresenter {
     }
 
     public void getAvgGrade() {
-        this.activityInterface.setResultMsg("Average grade climbed: " + Long.toString(climbInteractor.getAvgGrade()));
+        this.activityInterface.setResultMsg("Average grade climbed: " + this.climbInteractor.getAvgGrade());
     }
 }

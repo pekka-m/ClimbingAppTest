@@ -5,13 +5,13 @@ package m.pekka.climbinapptest.Climb;
  */
 public class ClimbEntity {
 
-    private String grade;
+    private int grade;
 
-    public String getGrade() {
+    public int getGrade() {
         return grade;
     }
 
-    public void setGrade(String grade) {
+    public void setGrade(int grade) {
         this.grade = grade;
     }
 }
