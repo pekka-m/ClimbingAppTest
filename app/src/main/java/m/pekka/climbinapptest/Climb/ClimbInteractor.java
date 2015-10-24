@@ -27,7 +27,7 @@ public class ClimbInteractor {
         }
         climbEntity.setGrade(this.converter.gradeToInt(grade[0] + grade[1].toUpperCase() + "-"));
         if (climbEntity.getGrade() == -1) {
-            throw new Exception();
+            return -1;
         }
         return mapper.insertClimb(climbEntity);
     }

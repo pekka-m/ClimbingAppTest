@@ -16,18 +16,17 @@ public class ClimbPresenter {
     }
 
     public void addClimb() {
-        String[] input = this.activityInterface.getInput();
-        if (input[0].equals("")) {
-            this.activityInterface.setResultMsg("Input field error.");
-        }
-        else {
-            try {
-                this.climbInteractor.addClimb(input);
+        try {
+            String[] input = this.activityInterface.getInput();
+            if (input[0].equals("") || this.climbInteractor.addClimb(input) == -1) {
+                this.activityInterface.setResultMsg("Input field error.");
+            }
+            else {
                 this.activityInterface.setResultMsg("Climb added to db.");
             }
-            catch (Exception e) {
-                this.activityInterface.setResultMsg("Database error.");
-            }
+        }
+        catch (Exception e) {
+            this.activityInterface.setResultMsg("Database error.");
         }
     }
 
