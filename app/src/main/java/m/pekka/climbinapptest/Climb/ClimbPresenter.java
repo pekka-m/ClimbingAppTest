@@ -15,13 +15,14 @@ public class ClimbPresenter {
         this.climbInteractor = new ClimbInteractor(activityInterface.getContext());
     }
 
-    public void addClimb(String grade) {
-        if (grade.equals("")) {
+    public void addClimb() {
+        String[] input = this.activityInterface.getInput();
+        if (input[0].equals("") || input[1].equals("")) {
             this.activityInterface.setResultMsg("Input field error.");
         }
         else {
             try {
-                this.climbInteractor.addClimb(grade);
+                this.climbInteractor.addClimb(input);
                 this.activityInterface.setResultMsg("Climb added to db.");
             }
             catch (Exception e) {

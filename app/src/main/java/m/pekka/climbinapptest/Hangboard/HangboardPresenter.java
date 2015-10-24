@@ -17,9 +17,9 @@ public class HangboardPresenter {
         this.hangboardInteractor = new HangboardInteractor(activityInterface.getContext());
     }
 
-    public void addHang(String time) {
+    public void addHang() {
         try {
-            this.hangboardInteractor.addHang(Integer.parseInt(time));
+            this.hangboardInteractor.addHang(Integer.parseInt(this.activityInterface.getInput()[0]));
             this.activityInterface.setResultMsg("Hang added to db.");
         } catch (NumberFormatException e) {
             this.activityInterface.setResultMsg("Input field error.");

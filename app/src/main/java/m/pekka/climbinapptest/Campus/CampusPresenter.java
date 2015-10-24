@@ -15,9 +15,9 @@ public class CampusPresenter {
         this.campusInteractor = new CampusInteractor(activityInterface.getContext());
     }
 
-    public void addCampus(String steps) {
+    public void addCampus() {
         try {
-            this.campusInteractor.addCampus(Integer.parseInt(steps));
+            this.campusInteractor.addCampus(Integer.parseInt(this.activityInterface.getInput()[0]));
             this.activityInterface.setResultMsg("Campus added to db.");
         } catch (NumberFormatException e) {
             this.activityInterface.setResultMsg("Input field error.");

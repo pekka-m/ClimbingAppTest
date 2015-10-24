@@ -18,9 +18,9 @@ public class ClimbInteractor {
         this.mapper = new DBMapper(context);
     }
 
-    public long addClimb(String grade) throws Exception {
+    public long addClimb(String[] grade) throws Exception {
         climbEntity = new ClimbEntity();
-        climbEntity.setGrade(grade);
+        climbEntity.setGrade(grade[0] + grade[1]);
         return mapper.insertClimb(climbEntity);
     }
 
@@ -38,13 +38,17 @@ public class ClimbInteractor {
     public long getAvgGrade() {
         long totalGrade = 0;
         long gradeCount = 0;
+        String grade;
         this.cursor = this.mapper.fetchAll();
         if (cursor.moveToFirst()) {
             do {
-                totalGrade += cursor.getInt(0);
+                grade = cursor.getString(0); //grade = 9A
+                grade = grade.replaceAll("[^0-9]+", ""); //grade = 9
+                totalGrade += Integer.parseInt(grade); //grade to int
                 gradeCount++;
             } while (cursor.moveToNext());
+            return totalGrade / gradeCount;
         }
-        return totalGrade / gradeCount;
+        return 0;
     }
 }

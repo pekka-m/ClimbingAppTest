@@ -49,10 +49,15 @@ public class ClimbActivity extends AppCompatActivity implements ActivityInterfac
         return this;
     }
 
+    @Override
+    public String[] getInput() {
+        return new String[] { editText_gradeNumber.getText().toString(), editText_gradeLetter.getText().toString() };
+    }
+
     private View.OnClickListener addClimb() {
         return new View.OnClickListener() {
             public void onClick(View v) {
-                climbPresenter.addClimb(getGrade());
+                climbPresenter.addClimb();
             }
         };
     }

@@ -8,4 +8,5 @@ import android.content.Context;
 public interface ActivityInterface {
     void setResultMsg(String msg);
     Context getContext();
+    String[] getInput();
 }

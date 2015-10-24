@@ -46,10 +46,15 @@ public class CampusActivity extends AppCompatActivity implements ActivityInterfa
         return this;
     }
 
+    @Override
+    public String[] getInput() {
+        return new String[] { editText_campusSteps.getText().toString() };
+    }
+
     private View.OnClickListener addCampus() {
         return new View.OnClickListener() {
             public void onClick(View v) {
-                campusPresenter.addCampus(editText_campusSteps.getText().toString());
+                campusPresenter.addCampus();
             }
         };
     }

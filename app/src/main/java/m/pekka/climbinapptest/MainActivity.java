@@ -69,6 +69,11 @@ public class MainActivity extends AppCompatActivity implements ActivityInterface
     }
 
     @Override
+    public String[] getInput() {
+        return new String[0];
+    }
+
+    @Override
     public Context getContext() {
         return this;
     }
