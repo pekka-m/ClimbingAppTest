@@ -17,7 +17,7 @@ public class ClimbPresenter {
 
     public void addClimb() {
         String[] input = this.activityInterface.getInput();
-        if (input[0].equals("") || input[1].equals("")) {
+        if (input[0].equals("")) {
             this.activityInterface.setResultMsg("Input field error.");
         }
         else {

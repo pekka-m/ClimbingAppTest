@@ -22,7 +22,10 @@ public class ClimbInteractor {
 
     public long addClimb(String[] grade) throws Exception {
         climbEntity = new ClimbEntity();
-        climbEntity.setGrade(this.converter.gradeToInt(grade[0] + grade[1] + "-"));
+        if (grade[1].equals("")) {
+            grade[1] = "-";
+        }
+        climbEntity.setGrade(this.converter.gradeToInt(grade[0] + grade[1].toUpperCase() + "-"));
         if (climbEntity.getGrade() == -1) {
             throw new Exception();
         }
